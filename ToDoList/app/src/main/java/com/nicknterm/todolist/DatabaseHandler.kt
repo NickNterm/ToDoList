@@ -24,14 +24,15 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         private const val KEY_TASK_NAME = "name"
         private const val KEY_TIME_START = "starts"
         private const val KEY_TIME_END = "ends"
+        private const val KEY_TASK_COLOR = "color"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val sql = ("CREATE TABLE $TABLE_NAME ($KEY_ID INTEGER PRIMARY KEY, $KEY_ELEMENT_ID INT, $KEY_DAY TEXT, $KEY_TASK_NAME TEXT, $KEY_TIME_START TEXT, $KEY_TIME_END TEXT)")
+        val sql = ("CREATE TABLE $TABLE_NAME ($KEY_ID INTEGER PRIMARY KEY, $KEY_ELEMENT_ID INT, $KEY_DAY TEXT, $KEY_TASK_NAME TEXT, $KEY_TIME_START TEXT, $KEY_TIME_END TEXT, $KEY_TASK_COLOR INT)")
         db?.execSQL(sql)
-        val sql1 = ("INSERT INTO $TABLE_NAME ($KEY_ELEMENT_ID, $KEY_DAY, $KEY_TASK_NAME, $KEY_TIME_START, $KEY_TIME_END) VALUES ('0', 'Monday', 'Test', '10:00', '11:00')")
+        val sql1 = ("INSERT INTO $TABLE_NAME ($KEY_ELEMENT_ID, $KEY_DAY, $KEY_TASK_NAME, $KEY_TIME_START, $KEY_TIME_END, $KEY_TASK_COLOR) VALUES ('0', 'Monday', 'Test', '10:00', '11:00' , 1)")
         db?.execSQL(sql1)
-        val sql2 = ("INSERT INTO $TABLE_NAME ($KEY_ELEMENT_ID, $KEY_DAY, $KEY_TASK_NAME, $KEY_TIME_START, $KEY_TIME_END) VALUES ('0', 'Friday', 'TestFirday', '10:00', '11:00')")
+        val sql2 = ("INSERT INTO $TABLE_NAME ($KEY_ELEMENT_ID, $KEY_DAY, $KEY_TASK_NAME, $KEY_TIME_START, $KEY_TIME_END, $KEY_TASK_COLOR) VALUES ('0', 'Friday', 'TestFirday', '10:00', '11:00', 1)")
         db?.execSQL(sql2)
     }
 
@@ -57,6 +58,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         var name: String
         var endTime: String
         var startTime: String
+        var color: Int
         val finalList:ArrayList<FragmentRecycleViewItems> = ArrayList<FragmentRecycleViewItems>()
         if(cursor.moveToFirst()){
             do{
@@ -65,8 +67,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
                 name = cursor.getString(cursor.getColumnIndex(KEY_TASK_NAME))
                 endTime = cursor.getString(cursor.getColumnIndex(KEY_TIME_END))
                 startTime = cursor.getString(cursor.getColumnIndex(KEY_TIME_START))
-
-                val item = FragmentRecycleViewItems(localId, name, startTime, endTime, day)
+                color = cursor.getInt(cursor.getColumnIndex(KEY_TASK_COLOR))
+                val item = FragmentRecycleViewItems(localId, name, startTime, endTime, day, color)
                 finalList.add(item)
             }while(cursor.moveToNext())
         }

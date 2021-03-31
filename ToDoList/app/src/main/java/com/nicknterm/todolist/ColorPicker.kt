@@ -8,61 +8,61 @@ import androidx.activity.OnBackPressedCallback
 import kotlinx.android.synthetic.main.activity_color_picker.*
 
 class ColorPicker : AppCompatActivity() {
-    var finalColorString: Int? = null
-    var day: String? = null
+    var finalColor: Int? = null
+    var item: FragmentRecycleViewItems? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color_picker)
-        day = intent.getStringExtra("Day")
+        item = intent.getParcelableExtra("ItemToAdd")
         ColorPickerRed.setOnClickListener {
             deselectAll()
             ColorPickerRed.setBackgroundResource(R.drawable.color_selected_in_color_picker)
-            finalColorString = R.color.red
+            finalColor = R.color.red
         }
         ColorPickerBlue.setOnClickListener {
             deselectAll()
             ColorPickerBlue.setBackgroundResource(R.drawable.color_selected_in_color_picker)
-            finalColorString = R.color.blue
+            finalColor = R.color.blue
         }
         ColorPickerCyan.setOnClickListener {
             deselectAll()
             ColorPickerCyan.setBackgroundResource(R.drawable.color_selected_in_color_picker)
-            finalColorString = R.color.cyan
+            finalColor = R.color.cyan
         }
         ColorPickerGreen.setOnClickListener {
             deselectAll()
             ColorPickerGreen.setBackgroundResource(R.drawable.color_selected_in_color_picker)
-            finalColorString = R.color.green
+            finalColor = R.color.green
         }
         ColorPickerLime.setOnClickListener {
             deselectAll()
             ColorPickerLime.setBackgroundResource(R.drawable.color_selected_in_color_picker)
-            finalColorString = R.color.lime
+            finalColor = R.color.lime
         }
         ColorPickerOrange.setOnClickListener {
             deselectAll()
             ColorPickerOrange.setBackgroundResource(R.drawable.color_selected_in_color_picker)
-            finalColorString = R.color.orange
+            finalColor = R.color.orange
         }
         ColorPickerYellow.setOnClickListener {
             deselectAll()
             ColorPickerYellow.setBackgroundResource(R.drawable.color_selected_in_color_picker)
-            finalColorString = R.color.yellow
+            finalColor = R.color.yellow
         }
         ColorPickerSelect.setOnClickListener {
-            val intent = Intent(this, AddTasksInRecycleView::class.java)
-            intent.putExtra("Color", finalColorString)
-            intent.putExtra("Day", day)
-            startActivity(intent)
-            finish()
+            goToAddTask()
         }
 
     }
 
     override fun onBackPressed() {
+        goToAddTask()
+    }
+    private fun goToAddTask(){
         val intent = Intent(this, AddTasksInRecycleView::class.java)
-        intent.putExtra("Color", finalColorString)
-        intent.putExtra("Day", day)
+        finalColor?.let { item?.setColor(it) }
+        intent.putExtra("Day", item?.getDay())
+        intent.putExtra("ItemToAdd", item)
         startActivity(intent)
         finish()
     }
