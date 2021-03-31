@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="MyTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="MyTheme" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/PrimaryCyan</item>
         <item name="colorPrimaryVariant">@color/PrimaryBackgroundDark</item>

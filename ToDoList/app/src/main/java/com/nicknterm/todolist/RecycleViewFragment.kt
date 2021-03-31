@@ -34,18 +34,6 @@ class RecycleViewFragment(private var dayPar: String) : Fragment() {
         return view
     }
 
-    fun dayToNum(day: String): Int{
-        return when(day){
-            "Monday" -> 0
-            "Tuesday" -> 1
-            "Wednesday" -> 2
-            "Thursday" -> 3
-            "Friday" -> 4
-            "Saturday" -> 5
-            "Sunday" -> 6
-            else -> 0
-        }
-    }
     companion object {
 
     }

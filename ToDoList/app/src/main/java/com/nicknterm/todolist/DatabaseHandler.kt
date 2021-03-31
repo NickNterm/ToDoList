@@ -31,6 +31,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         db?.execSQL(sql)
         val sql1 = ("INSERT INTO $TABLE_NAME ($KEY_ELEMENT_ID, $KEY_DAY, $KEY_TASK_NAME, $KEY_TIME_START, $KEY_TIME_END) VALUES ('0', 'Monday', 'Test', '10:00', '11:00')")
         db?.execSQL(sql1)
+        val sql2 = ("INSERT INTO $TABLE_NAME ($KEY_ELEMENT_ID, $KEY_DAY, $KEY_TASK_NAME, $KEY_TIME_START, $KEY_TIME_END) VALUES ('0', 'Friday', 'TestFirday', '10:00', '11:00')")
+        db?.execSQL(sql2)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
