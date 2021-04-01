@@ -1,19 +1,21 @@
 package com.nicknterm.todolist
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.OnBackPressedCallback
+import com.github.dhaval2404.colorpicker.ColorPickerDialog
+import com.github.dhaval2404.colorpicker.model.ColorShape
 import kotlinx.android.synthetic.main.activity_color_picker.*
 
 class ColorPicker : AppCompatActivity() {
     var finalColor: Int = R.color.red
     var item: FragmentRecycleViewItems? = null
+    var mode: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color_picker)
         item = intent.getParcelableExtra("ItemToAdd")
+        mode = intent.getStringExtra("Mode")
         ColorPickerRed.setOnClickListener {
             deselectAll()
             ColorPickerRed.setBackgroundResource(R.drawable.color_selected_in_color_picker)
@@ -52,6 +54,17 @@ class ColorPicker : AppCompatActivity() {
         ColorPickerSelect.setOnClickListener {
             goToAddTask()
         }
+        ColorPickerCustom.setOnClickListener {
+            ColorPickerDialog
+                    .Builder(this)        				// Pass Activity Instance
+                    .setTitle("Pick Theme")           	// Default "Choose Color"
+                    .setColorShape(ColorShape.SQAURE)   // Default ColorShape.CIRCLE
+                    .setDefaultColor("#000000")     // Pass Default Color
+                    .setColorListener { color, colorHex ->
+                        // Handle Color Selection
+                    }
+                    .show()
+        }
 
     }
 
@@ -63,6 +76,7 @@ class ColorPicker : AppCompatActivity() {
         item?.setColor(finalColor)
         intent.putExtra("Day", item?.getDay())
         intent.putExtra("ItemToAdd", item)
+        intent.putExtra("Mode", mode)
         startActivity(intent)
         finish()
     }

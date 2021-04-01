@@ -1,4 +1,4 @@
- package com.nicknterm.todolist
+package com.nicknterm.todolist
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,16 +10,17 @@ import kotlinx.android.synthetic.main.fragment_recycle_view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
- class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private var tabAdapter: TabAdapter? = null
     private var dayToStart: Int = 0
+
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        dayToStart = if(intent.getStringExtra("Day")!=null){
+        dayToStart = if (intent.getStringExtra("Day") != null) {
             dayToInt(intent.getStringExtra("Day")!!)
-        }else {
+        } else {
             val sdf = SimpleDateFormat("EEEE")
             dayToInt(sdf.format(Date()))
         }
@@ -51,8 +52,8 @@ import java.util.*
         }
     }
 
-    private fun dayToInt(day: String):Int{
-        return when(day){
+    private fun dayToInt(day: String): Int {
+        return when (day) {
             "Monday" -> 0
             "Tuesday" -> 1
             "Wednesday" -> 2
@@ -64,8 +65,8 @@ import java.util.*
         }
     }
 
-    private fun intToDay(int: Int):String{
-        return when(int){
+    private fun intToDay(int: Int): String {
+        return when (int) {
             0 -> "Monday"
             1 -> "Tuesday"
             2 -> "Wednesday"

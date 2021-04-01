@@ -5,8 +5,10 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.sax.EndTextElementListener
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_add_tasks_in_recycle_view.*
 import kotlinx.android.synthetic.main.time_picker_dialog.*
 import java.util.*
@@ -19,10 +21,13 @@ class AddTasksInRecycleView : AppCompatActivity() {
     private var color: Int? = null
     private var name: String? = null
     private var itemToAdd: FragmentRecycleViewItems? = null
+    private var mode: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_tasks_in_recycle_view)
         setSupportActionBar(AddTaskToolBar)
+        mode = intent.getStringExtra("Mode")
         day = intent.getStringExtra("Day")
         name = intent.getStringExtra("Name")
         itemToAdd = intent.getParcelableExtra("ItemToAdd")
@@ -39,12 +44,25 @@ class AddTasksInRecycleView : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             endTime = EndTimeTextView.text.toString()
             startTime = StartTimeTextView.text.toString()
-            val item = endTime?.let { it1 -> startTime?.let { it2 -> FragmentRecycleViewItems(0, NameEditText.text.toString(), it2, it1, day!!, color!!)}}
-            if (item != null) {
-                dbHandler!!.addTaskInDay(item)
+            name = NameEditText.text.toString()
+            if (name!!.isEmpty()){
+                Snackbar.make(it,"Enter a task name", Snackbar.LENGTH_LONG)
+                        .setTextColor(resources.getColor(R.color.white))
+                        .setBackgroundTint(resources.getColor(R.color.PrimaryBackgroundDark))
+                        .show()
+            }else if(color==null) {
+                Snackbar.make(it,"Select a color", Snackbar.LENGTH_LONG)
+                        .setTextColor(resources.getColor(R.color.white))
+                        .setBackgroundTint(resources.getColor(R.color.PrimaryBackgroundDark))
+                        .show()
+            }else{
+                val item = endTime?.let { it1 -> startTime?.let { it2 -> FragmentRecycleViewItems(0, name, it2, it1, day!!, color!!) } }
+                if (item != null) {
+                    dbHandler!!.addTaskInDay(item)
+                }
+                intent.putExtra("Day", day)
+                startActivity(intent)
             }
-            intent.putExtra("Day", day)
-            startActivity(intent)
         }
 
         StartTimeButton.setOnClickListener {
@@ -63,6 +81,7 @@ class AddTasksInRecycleView : AppCompatActivity() {
                 FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, 1)
             }
             intent.putExtra("ItemToAdd", item)
+            intent.putExtra("Mode", mode)
             startActivity(intent)
             finish()
         }
@@ -75,15 +94,23 @@ class AddTasksInRecycleView : AppCompatActivity() {
         }
         StartTimeTextView.text = startTime
         if(endTime == null) {
-            endTime = String.format("%02d:%02d",Calendar.getInstance().time.hours, Calendar.getInstance().time.minutes)
+            endTime = String.format("%02d:%02d",(Calendar.getInstance().time.hours + 1) % 24, Calendar.getInstance().time.minutes)
         }
         EndTimeTextView.text = endTime
         if(name != null){
             NameEditText.setText(name)
         }
         if (color != null) {
-            ColorText.setTextColor(R.color.black)
             llColorCardView.setBackgroundResource(color!!)
+        }
+        if (mode == "Edit"){
+            DeleteCardView.visibility = View.VISIBLE
+            EditCardView.visibility = View.VISIBLE
+            SaveCardView.visibility = View.GONE
+        }else{
+            DeleteCardView.visibility = View.GONE
+            EditCardView.visibility = View.GONE
+            SaveCardView.visibility = View.VISIBLE
         }
     }
 
