@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoList">
-        <activity android:name=".ColorPicker"></activity>
+        <activity android:name=".ColorPicker"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyTheme"/>
         <activity
             android:name=".AddTasksInRecycleView"
             android:screenOrientation="portrait"

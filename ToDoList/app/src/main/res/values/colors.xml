@@ -14,12 +14,12 @@
     <color name="SecondaryBackgroundDark">#1B1E22</color>
     <color name="PrimaryTextColorGray">#B5B5B5</color>
 
-
-    <color name="red">#ff0000 </color>
-    <color name="orange">#ffa500 </color>
-    <color name="yellow">#ffff00</color>
-    <color name="green">#008000 </color>
-    <color name="lime">#5FE600</color>
-    <color name="cyan">#00FFD9</color>
-    <color name="blue">#2C4E91</color>
+    <color name="textColor">#393939</color>
+    <color name="red">#cc0000</color>
+    <color name="orange">#e65c00 </color>
+    <color name="yellow">#cccc00</color>
+    <color name="green">#009900 </color>
+    <color name="lime">#59b300</color>
+    <color name="cyan">#33cccc</color>
+    <color name="blue">#3366ff</color>
 </resources>

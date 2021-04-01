@@ -60,7 +60,7 @@ class AddTasksInRecycleView : AppCompatActivity() {
             val item = if (color!=null) {
                 FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, color!!)
             } else{
-                FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, 0)
+                FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, 1)
             }
             intent.putExtra("ItemToAdd", item)
             startActivity(intent)
@@ -70,12 +70,14 @@ class AddTasksInRecycleView : AppCompatActivity() {
 
     @SuppressLint("ResourceAsColor")
     fun refreshUI(){
-        if(startTime != null) {
-            StartTimeTextView.text = startTime
+        if(startTime == null) {
+            startTime = String.format("%02d:%02d",Calendar.getInstance().time.hours, Calendar.getInstance().time.minutes)
         }
-        if(endTime != null) {
-            EndTimeTextView.text = endTime
+        StartTimeTextView.text = startTime
+        if(endTime == null) {
+            endTime = String.format("%02d:%02d",Calendar.getInstance().time.hours, Calendar.getInstance().time.minutes)
         }
+        EndTimeTextView.text = endTime
         if(name != null){
             NameEditText.setText(name)
         }

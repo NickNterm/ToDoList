@@ -30,10 +30,6 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     override fun onCreate(db: SQLiteDatabase?) {
         val sql = ("CREATE TABLE $TABLE_NAME ($KEY_ID INTEGER PRIMARY KEY, $KEY_ELEMENT_ID INT, $KEY_DAY TEXT, $KEY_TASK_NAME TEXT, $KEY_TIME_START TEXT, $KEY_TIME_END TEXT, $KEY_TASK_COLOR INT)")
         db?.execSQL(sql)
-        val sql1 = ("INSERT INTO $TABLE_NAME ($KEY_ELEMENT_ID, $KEY_DAY, $KEY_TASK_NAME, $KEY_TIME_START, $KEY_TIME_END, $KEY_TASK_COLOR) VALUES ('0', 'Monday', 'Test', '10:00', '11:00' , 1)")
-        db?.execSQL(sql1)
-        val sql2 = ("INSERT INTO $TABLE_NAME ($KEY_ELEMENT_ID, $KEY_DAY, $KEY_TASK_NAME, $KEY_TIME_START, $KEY_TIME_END, $KEY_TASK_COLOR) VALUES ('0', 'Friday', 'TestFirday', '10:00', '11:00', 1)")
-        db?.execSQL(sql2)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -68,6 +64,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
                 endTime = cursor.getString(cursor.getColumnIndex(KEY_TIME_END))
                 startTime = cursor.getString(cursor.getColumnIndex(KEY_TIME_START))
                 color = cursor.getInt(cursor.getColumnIndex(KEY_TASK_COLOR))
+
                 val item = FragmentRecycleViewItems(localId, name, startTime, endTime, day, color)
                 finalList.add(item)
             }while(cursor.moveToNext())
@@ -84,6 +81,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         contentValues.put(KEY_TASK_NAME, item.getName())
         contentValues.put(KEY_TIME_END, item.getTimeEnd())
         contentValues.put(KEY_TIME_START, item.getTimeStart())
+        contentValues.put(KEY_TASK_COLOR, item.getColor())
 
         val success = db.insert(TABLE_NAME, null, contentValues)
         db.close()

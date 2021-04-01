@@ -8,7 +8,7 @@ import androidx.activity.OnBackPressedCallback
 import kotlinx.android.synthetic.main.activity_color_picker.*
 
 class ColorPicker : AppCompatActivity() {
-    var finalColor: Int? = null
+    var finalColor: Int = R.color.red
     var item: FragmentRecycleViewItems? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +60,7 @@ class ColorPicker : AppCompatActivity() {
     }
     private fun goToAddTask(){
         val intent = Intent(this, AddTasksInRecycleView::class.java)
-        finalColor?.let { item?.setColor(it) }
+        item?.setColor(finalColor)
         intent.putExtra("Day", item?.getDay())
         intent.putExtra("ItemToAdd", item)
         startActivity(intent)
