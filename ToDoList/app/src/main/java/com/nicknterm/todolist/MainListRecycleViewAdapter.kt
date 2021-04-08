@@ -40,6 +40,11 @@ class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleVie
             holder.buttonLL.visibility = View.GONE
         } else {
             holder.buttonLL.visibility = View.VISIBLE
+            /*
+            holder.buttonLL.translationX = holder.buttonLL.width.toFloat()
+            holder.buttonLL.animate()
+                    .translationX(0f)
+                    .duration = 300\*/
         }
         if (item.getColor() != 1) {
             val color = item.getColor()
@@ -48,15 +53,16 @@ class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleVie
         holder.mainLL.setOnClickListener {
             if (holder.buttonLL.visibility == View.VISIBLE) {
                 openedTask = -1
+                /*
                 holder.buttonLL.animate()
                         .translationX(holder.buttonLL.width.toFloat())
-                        .withEndAction {
+                        .withEndAction {*/
                             holder.buttonLL.visibility = View.GONE
-                        }.duration = 300
+                            notifyDataSetChanged()
+                       // }.duration = 300
             } else {
                 openedTask = position
                 notifyDataSetChanged()
-                holder.buttonLL.visibility = View.VISIBLE
             }
         }
         holder.editButton.setOnClickListener {

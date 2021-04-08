@@ -87,4 +87,30 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         db.close()
         return success
     }
+
+    fun updateItem(day: String, id: Int, item: FragmentRecycleViewItems){
+
+        val values = ContentValues()
+
+        values.put(KEY_ELEMENT_ID, item.getId())
+        values.put(KEY_DAY, item.getDay())
+        values.put(KEY_TASK_NAME, item.getName())
+        values.put(KEY_TIME_END, item.getTimeEnd())
+        values.put(KEY_TIME_START, item.getTimeStart())
+        values.put(KEY_TASK_COLOR, item.getColor())
+
+        val db = this.writableDatabase
+        db.update(TABLE_NAME, values, "$KEY_DAY='$day' AND $KEY_ELEMENT_ID=$id", arrayOf())
+    }
+
+    fun getElementId(day:String): Int{
+        val items = tasksInDay(day)
+        var maxId = 0
+        for (i in items){
+            if(i.getId()>maxId){
+                maxId = i.getId()
+            }
+        }
+        return maxId
+    }
 }

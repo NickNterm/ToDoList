@@ -22,6 +22,7 @@ class AddTasksInRecycleView : AppCompatActivity() {
     private var name: String? = null
     private var itemToAdd: FragmentRecycleViewItems? = null
     private var mode: String? = null
+    private var elementId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,8 @@ class AddTasksInRecycleView : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.title = "Add Task In $day"
         dbHandler = DatabaseHandler(this)
+        elementId = day?.let { dbHandler!!.getElementId(it) }
+        elementId = elementId?.plus(1)
         AddTask.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             endTime = EndTimeTextView.text.toString()
@@ -56,7 +59,7 @@ class AddTasksInRecycleView : AppCompatActivity() {
                         .setBackgroundTint(resources.getColor(R.color.PrimaryBackgroundDark))
                         .show()
             }else{
-                val item = endTime?.let { it1 -> startTime?.let { it2 -> FragmentRecycleViewItems(0, name, it2, it1, day!!, color!!) } }
+                val item = endTime?.let { it1 -> startTime?.let { it2 -> FragmentRecycleViewItems(elementId!!, name, it2, it1, day!!, color!!) } }
                 if (item != null) {
                     dbHandler!!.addTaskInDay(item)
                 }
@@ -76,14 +79,38 @@ class AddTasksInRecycleView : AppCompatActivity() {
         PickColorButton.setOnClickListener {
             val intent = Intent(this, ColorPicker::class.java)
             val item = if (color!=null) {
-                FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, color!!)
+                FragmentRecycleViewItems(elementId!!, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, color!!)
             } else{
-                FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, 1)
+                FragmentRecycleViewItems(elementId!!, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, 1)
             }
             intent.putExtra("ItemToAdd", item)
             intent.putExtra("Mode", mode)
             startActivity(intent)
             finish()
+        }
+        EditButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            endTime = EndTimeTextView.text.toString()
+            startTime = StartTimeTextView.text.toString()
+            name = NameEditText.text.toString()
+            if (name!!.isEmpty()){
+                Snackbar.make(it,"Enter a task name", Snackbar.LENGTH_LONG)
+                        .setTextColor(resources.getColor(R.color.white))
+                        .setBackgroundTint(resources.getColor(R.color.PrimaryBackgroundDark))
+                        .show()
+            }else if(color==null) {
+                Snackbar.make(it,"Select a color", Snackbar.LENGTH_LONG)
+                        .setTextColor(resources.getColor(R.color.white))
+                        .setBackgroundTint(resources.getColor(R.color.PrimaryBackgroundDark))
+                        .show()
+            }else{
+                val item = endTime?.let { it1 -> startTime?.let { it2 -> FragmentRecycleViewItems(0, name, it2, it1, day!!, color!!) } }
+                if (item != null) {
+                    day?.let { it1 -> itemToAdd?.let { it2 -> dbHandler!!.updateItem(it1, it2.getId(),item) } }
+                }
+                intent.putExtra("Day", day)
+                startActivity(intent)
+            }
         }
     }
 
