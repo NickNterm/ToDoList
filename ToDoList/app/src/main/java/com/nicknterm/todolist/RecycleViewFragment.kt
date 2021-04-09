@@ -30,7 +30,9 @@ class RecycleViewFragment(private var dayPar: String) : Fragment() {
         val view = inflater.inflate(R.layout.fragment_recycle_view, container, false)
         view.FragmentRecycleView.layoutManager = LinearLayoutManager(context)
         view.FragmentRecycleView.adapter = adapter
-        view.day.text = dayPar
+        if(dayRecycleViewItemsList.size != 0) {
+            view.NoEventLayout.visibility = View.GONE
+        }
         return view
     }
 

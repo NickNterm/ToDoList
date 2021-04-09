@@ -15,7 +15,17 @@
             android:layout_width="match_parent"
             android:background="@color/PrimaryBackgroundDark"
             android:layout_height="?android:attr/actionBarSize"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:gravity="right"
+            app:layout_constraintTop_toTopOf="parent" >
+            <ImageButton
+                android:id="@+id/SettingsButton"
+                android:background="@color/PrimaryBackgroundDark"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_settings_24"/>
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <com.google.android.material.tabs.TabLayout
             android:background="@color/PrimaryBackgroundDark"
@@ -24,8 +34,8 @@
             android:layout_height="wrap_content"
             app:tabTextColor="@color/white"
             app:tabMode="auto"
-            app:tabSelectedTextColor="@color/PrimaryCyan"
-            app:tabRippleColor="@color/SecondaryTextColorCyan"
+            app:tabSelectedTextColor="?android:colorAccent"
+            app:tabRippleColor="?android:colorAccent"
             app:tabGravity="fill"
             app:layout_constraintTop_toBottomOf="@+id/MainActivityToolBar" />
 

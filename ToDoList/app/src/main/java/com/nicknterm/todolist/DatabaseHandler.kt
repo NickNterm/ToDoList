@@ -101,6 +101,13 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
 
         val db = this.writableDatabase
         db.update(TABLE_NAME, values, "$KEY_DAY='$day' AND $KEY_ELEMENT_ID=$id", arrayOf())
+        db.close()
+    }
+
+    fun deleteItem(day: String, id: Int){
+        val db = this.writableDatabase
+        db.delete(TABLE_NAME,"$KEY_DAY='$day' AND $KEY_ELEMENT_ID=$id", arrayOf())
+        db.close()
     }
 
     fun getElementId(day:String): Int{

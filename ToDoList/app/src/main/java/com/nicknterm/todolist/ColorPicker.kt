@@ -3,6 +3,7 @@ package com.nicknterm.todolist
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.preference.PreferenceManager
 import com.github.dhaval2404.colorpicker.ColorPickerDialog
 import com.github.dhaval2404.colorpicker.model.ColorShape
 import kotlinx.android.synthetic.main.activity_color_picker.*
@@ -12,6 +13,17 @@ class ColorPicker : AppCompatActivity() {
     var item: FragmentRecycleViewItems? = null
     var mode: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+        when (sharedPref.getString("color", "primaryCyan")) {
+            "red" -> setTheme(R.style.MyTheme_red)
+            "orange" -> setTheme(R.style.MyTheme_orange)
+            "yellow" -> setTheme(R.style.MyTheme_yellow)
+            "green" -> setTheme(R.style.MyTheme_green)
+            "lime" -> setTheme(R.style.MyTheme_lime)
+            "cyan" -> setTheme(R.style.MyTheme_light_cyan)
+            "primaryCyan" -> setTheme(R.style.MyTheme_cyan)
+            "blue" -> setTheme(R.style.MyTheme_blue)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color_picker)
         item = intent.getParcelableExtra("ItemToAdd")

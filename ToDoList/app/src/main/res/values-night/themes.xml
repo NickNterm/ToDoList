@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="MyTheme" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="MyTheme.cyan" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/PrimaryCyan</item>
         <item name="colorPrimaryVariant">@color/PrimaryBackgroundDark</item>
@@ -27,5 +27,98 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="MyTheme.red" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimaryVariant">@color/PrimaryBackgroundDark</item>
+        <item name="colorOnPrimary">@color/PrimaryBackgroundDark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/red</item>
+        <item name="colorSecondaryVariant">@color/redDark</item>
+        <item name="colorOnSecondary">@color/PrimaryBackgroundDark</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="MyTheme.orange" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryVariant">@color/PrimaryBackgroundDark</item>
+        <item name="colorOnPrimary">@color/PrimaryBackgroundDark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorSecondaryVariant">@color/orangeDark</item>
+        <item name="colorOnSecondary">@color/PrimaryBackgroundDark</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="MyTheme.yellow" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryVariant">@color/PrimaryBackgroundDark</item>
+        <item name="colorOnPrimary">@color/PrimaryBackgroundDark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/yellow</item>
+        <item name="colorSecondaryVariant">@color/yellowDark</item>
+        <item name="colorOnSecondary">@color/PrimaryBackgroundDark</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="MyTheme.green" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryVariant">@color/PrimaryBackgroundDark</item>
+        <item name="colorOnPrimary">@color/PrimaryBackgroundDark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/green</item>
+        <item name="colorSecondaryVariant">@color/greenDark</item>
+        <item name="colorOnSecondary">@color/PrimaryBackgroundDark</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="MyTheme.lime" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryVariant">@color/PrimaryBackgroundDark</item>
+        <item name="colorOnPrimary">@color/PrimaryBackgroundDark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/lime</item>
+        <item name="colorSecondaryVariant">@color/limeDark</item>
+        <item name="colorOnSecondary">@color/PrimaryBackgroundDark</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="MyTheme.light_cyan" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/cyan</item>
+        <item name="colorPrimaryVariant">@color/PrimaryBackgroundDark</item>
+        <item name="colorOnPrimary">@color/PrimaryBackgroundDark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/cyan</item>
+        <item name="colorSecondaryVariant">@color/cyanDark</item>
+        <item name="colorOnSecondary">@color/PrimaryBackgroundDark</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="MyTheme.blue" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/PrimaryBackgroundDark</item>
+        <item name="colorOnPrimary">@color/PrimaryBackgroundDark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/blue</item>
+        <item name="colorSecondaryVariant">@color/blueDark</item>
+        <item name="colorOnSecondary">@color/PrimaryBackgroundDark</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+
 
 </resources>

@@ -1,9 +1,11 @@
 package com.nicknterm.todolist
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_recycle_view.*
@@ -16,6 +18,17 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+        when (sharedPref.getString("color", "primaryCyan")) {
+            "red" -> setTheme(R.style.MyTheme_red)
+            "orange" -> setTheme(R.style.MyTheme_orange)
+            "yellow" -> setTheme(R.style.MyTheme_yellow)
+            "green" -> setTheme(R.style.MyTheme_green)
+            "lime" -> setTheme(R.style.MyTheme_lime)
+            "cyan" -> setTheme(R.style.MyTheme_light_cyan)
+            "primaryCyan" -> setTheme(R.style.MyTheme_cyan)
+            "blue" -> setTheme(R.style.MyTheme_blue)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         dayToStart = if (intent.getStringExtra("Day") != null) {
@@ -49,6 +62,10 @@ class MainActivity : AppCompatActivity() {
             val intent: Intent = Intent(this, AddTasksInRecycleView::class.java)
             intent.putExtra("Day", intToDay(MainActivityViewPager.currentItem))
             startActivity(intent)
+        }
+        SettingsButton.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+            finish()
         }
     }
 

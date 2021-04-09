@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/mainLL"
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="5dp">
+<LinearLayout android:id="@+id/mainLL"
+
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@color/PrimaryBackgroundDark">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +40,7 @@
     <LinearLayout
         android:id="@+id/buttonLL"
         android:animateLayoutChanges="true"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -48,3 +56,4 @@
             android:text="Edit"/>
     </LinearLayout>
 </LinearLayout>
+    </androidx.cardview.widget.CardView>
