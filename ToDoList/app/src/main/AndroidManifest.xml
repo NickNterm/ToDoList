@@ -12,19 +12,15 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyTheme"/>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ColorPicker"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyTheme" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AddTasksInRecycleView"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyTheme" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/MyTheme"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

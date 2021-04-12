@@ -11,15 +11,15 @@
         android:orientation="vertical">
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/MainActivityToolBar"
-            app:titleTextColor="@color/white"
+            app:titleTextColor="?android:textColor"
             android:layout_width="match_parent"
-            android:background="@color/PrimaryBackgroundDark"
+            android:background="?colorPrimaryDark"
             android:layout_height="?android:attr/actionBarSize"
             android:gravity="right"
             app:layout_constraintTop_toTopOf="parent" >
             <ImageButton
                 android:id="@+id/SettingsButton"
-                android:background="@color/PrimaryBackgroundDark"
+                android:background="?colorPrimaryDark"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"
                 android:layout_width="wrap_content"
@@ -28,11 +28,11 @@
         </com.google.android.material.appbar.MaterialToolbar>
 
         <com.google.android.material.tabs.TabLayout
-            android:background="@color/PrimaryBackgroundDark"
+            android:background="?colorPrimaryDark"
             android:id="@+id/MainActivityTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="@color/white"
+            app:tabTextColor="?android:textColor"
             app:tabMode="auto"
             app:tabSelectedTextColor="?android:colorAccent"
             app:tabRippleColor="?android:colorAccent"
@@ -41,7 +41,7 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/MainActivityViewPager"
-            android:background="@color/SecondaryBackgroundDark"
+            android:background="?background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
