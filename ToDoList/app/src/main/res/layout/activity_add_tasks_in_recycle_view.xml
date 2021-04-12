@@ -26,6 +26,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/NameEditText"
             android:layout_width="match_parent"
+            android:maxLength="20"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,6 +108,33 @@
                 android:textColor="?android:textColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/PickIconButton"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="10dp">
+        <LinearLayout
+            android:id="@+id/llIconCardView"
+            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="?colorPrimaryDark"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:text="ICON"
+                android:textColor="?android:textColor"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_default_icon"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView

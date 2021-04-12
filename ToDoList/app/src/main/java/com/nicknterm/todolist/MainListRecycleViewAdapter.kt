@@ -26,6 +26,7 @@ class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleVie
         val mainLL: LinearLayout = view.mainLL
         val editButton: TextView = view.EditItemButton
         val buttonLL: LinearLayout = view.buttonLL
+        val endTimeText: TextView = view.EndTimeItemText
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,6 +37,7 @@ class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleVie
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         holder.timeText.text = "${item.getTimeStart()}"
+        holder.endTimeText.text = "${item.getTimeEnd()}"
         holder.nameText.text = item.getName()
         if (openedTask != position) {
             holder.buttonLL.animate()
