@@ -120,4 +120,14 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         }
         return maxId
     }
+
+    fun getLastTaskEndTime(day: String): String{
+        val tasks = tasksInDay(day)
+        return if(tasks.size > 0) {
+            tasks.sortBy { it.getTimeEnd() }
+            tasks[tasks.size-1].getTimeEnd()!!
+        }else{
+            "8:00"
+        }
+    }
 }

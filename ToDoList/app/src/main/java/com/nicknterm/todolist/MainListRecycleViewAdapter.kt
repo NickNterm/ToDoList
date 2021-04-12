@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.internal.ContextUtils.getActivity
 import kotlinx.android.synthetic.main.main_recycle_view_item.view.*
 
 class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleViewItems>, private val context: Context) :
@@ -31,7 +32,7 @@ class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleVie
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.main_recycle_view_item, parent, false))
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "RestrictedApi")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         holder.timeText.text = "${item.getTimeStart()}"
@@ -75,7 +76,7 @@ class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleVie
             intent.putExtra("Mode", "Edit")
             intent.putExtra("ItemToAdd", item)
             startActivity(context, intent, null)
-
+            getActivity(context)!!.finish()
         }
     }
 

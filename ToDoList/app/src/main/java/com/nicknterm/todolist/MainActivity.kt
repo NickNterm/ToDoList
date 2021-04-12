@@ -72,14 +72,19 @@ class MainActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
         AddButton.setOnClickListener {
-            val intent: Intent = Intent(this, AddTasksInRecycleView::class.java)
+            val intent = Intent(this, AddTasksInRecycleView::class.java)
             intent.putExtra("Day", intToDay(MainActivityViewPager.currentItem))
             startActivity(intent)
+            finish()
         }
         SettingsButton.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
             finish()
         }
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 
     private fun dayToInt(day: String): Int {

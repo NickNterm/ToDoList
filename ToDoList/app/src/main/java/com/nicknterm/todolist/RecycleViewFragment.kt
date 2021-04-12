@@ -24,6 +24,7 @@ class RecycleViewFragment(private var dayPar: String) : Fragment() {
         val db = context?.let { DatabaseHandler(it) }
         if (db != null) {
             dayRecycleViewItemsList = db.tasksInDay(dayPar)
+            dayRecycleViewItemsList.sortBy { it.getTimeStart() }
         }
         adapter = context?.let { MainListRecycleViewAdapter(dayRecycleViewItemsList, it) }
         // Inflate the layout for this fragment

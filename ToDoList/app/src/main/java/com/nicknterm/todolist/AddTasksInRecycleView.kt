@@ -3,10 +3,12 @@ package com.nicknterm.todolist
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.sax.EndTextElementListener
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
@@ -25,6 +27,7 @@ class AddTasksInRecycleView : AppCompatActivity() {
     private var mode: String? = null
     private var elementId: Int? = null
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
         if(sharedPref.getBoolean("theme", false)){
@@ -62,13 +65,13 @@ class AddTasksInRecycleView : AppCompatActivity() {
         endTime = itemToAdd?.getTimeEnd()
         startTime = itemToAdd?.getTimeStart()
         color = itemToAdd?.getColor()
-        refreshUI()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.title = "Add Task In $day"
         dbHandler = DatabaseHandler(this)
         elementId = day?.let { dbHandler!!.getElementId(it) }
         elementId = elementId?.plus(1)
+        refreshUI()
         AddTask.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             endTime = EndTimeTextView.text.toString()
@@ -91,6 +94,7 @@ class AddTasksInRecycleView : AppCompatActivity() {
                 }
                 intent.putExtra("Day", day)
                 startActivity(intent)
+                finish()
             }
         }
 
@@ -143,6 +147,7 @@ class AddTasksInRecycleView : AppCompatActivity() {
                 day?.let { it1 -> itemToAdd?.let { it2 -> dbHandler!!.updateItem(it1, it2.getId(),item) } }
                 intent.putExtra("Day", day)
                 startActivity(intent)
+                finish()
             }
         }
         DeleteButton.setOnClickListener{
@@ -150,17 +155,18 @@ class AddTasksInRecycleView : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("Day", day)
             startActivity(intent)
+            finish()
         }
     }
 
     @SuppressLint("ResourceAsColor")
     fun refreshUI(){
         if(startTime == null) {
-            startTime = String.format("%02d:%02d",Calendar.getInstance().time.hours, Calendar.getInstance().time.minutes)
+            startTime = String.format("%02d:%02d",dbHandler!!.getLastTaskEndTime(day!!).split(":")[0].toInt(),dbHandler!!.getLastTaskEndTime(day!!).split(":")[1].toInt())
         }
         StartTimeTextView.text = startTime
         if(endTime == null) {
-            endTime = String.format("%02d:%02d",(Calendar.getInstance().time.hours + 1) % 24, Calendar.getInstance().time.minutes)
+            endTime =  String.format("%02d:%02d",dbHandler!!.getLastTaskEndTime(day!!).split(":")[0].toInt() + 1,dbHandler!!.getLastTaskEndTime(day!!).split(":")[1].toInt())
         }
         EndTimeTextView.text = endTime
         if(name != null){
@@ -184,11 +190,14 @@ class AddTasksInRecycleView : AppCompatActivity() {
         onBackPressed()
         return true
     }
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun showTimerPickerDialog(text: TextView){
-        var result = String.format("%02d:%02d",Calendar.getInstance().time.hours, Calendar.getInstance().time.minutes)
+        var result = text.text
         val timePickerDialog = Dialog(this)
         timePickerDialog.setContentView(R.layout.time_picker_dialog)
         timePickerDialog.TimePickerInDialog.setIs24HourView(true)
+        timePickerDialog.TimePickerInDialog.hour = text.text.split(":")[0].toInt()
+        timePickerDialog.TimePickerInDialog.minute = text.text.split(":")[1].toInt()
         timePickerDialog.TimePickerInDialog.setOnTimeChangedListener {view, hourOfDay, minute ->  result=String.format("%02d:%02d",hourOfDay,minute)}
         timePickerDialog.TimePickerDialogCancelButton.setOnClickListener {
             timePickerDialog.dismiss()
@@ -198,5 +207,12 @@ class AddTasksInRecycleView : AppCompatActivity() {
             timePickerDialog.dismiss()
         }
         timePickerDialog.show()
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("Day", day)
+        startActivity(intent)
+        finish()
     }
 }
