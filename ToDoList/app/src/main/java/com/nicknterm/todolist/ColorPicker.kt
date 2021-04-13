@@ -9,7 +9,7 @@ import com.github.dhaval2404.colorpicker.model.ColorShape
 import kotlinx.android.synthetic.main.activity_color_picker.*
 
 class ColorPicker : AppCompatActivity() {
-    var finalColor: Int = R.color.red
+    var finalColor: Int? = null
     var item: FragmentRecycleViewItems? = null
     var mode: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +26,9 @@ class ColorPicker : AppCompatActivity() {
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color_picker)
+        setSupportActionBar(ToolBarColorPicker)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
         item = intent.getParcelableExtra("ItemToAdd")
         mode = intent.getStringExtra("Mode")
         ColorPickerRed.setOnClickListener {
@@ -81,11 +84,16 @@ class ColorPicker : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        goToAddTask()
+        val intent = Intent(this, AddTasksInRecycleView::class.java)
+        intent.putExtra("Day", item?.getDay())
+        intent.putExtra("ItemToAdd", item)
+        intent.putExtra("Mode", mode)
+        startActivity(intent)
+        finish()
     }
     private fun goToAddTask(){
         val intent = Intent(this, AddTasksInRecycleView::class.java)
-        item?.setColor(finalColor)
+        finalColor?.let { item?.setColor(it) }
         intent.putExtra("Day", item?.getDay())
         intent.putExtra("ItemToAdd", item)
         intent.putExtra("Mode", mode)
@@ -100,5 +108,10 @@ class ColorPicker : AppCompatActivity() {
         ColorPickerLime.setBackgroundResource(0)
         ColorPickerOrange.setBackgroundResource(0)
         ColorPickerYellow.setBackgroundResource(0)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

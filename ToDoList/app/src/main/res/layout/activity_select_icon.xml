@@ -6,231 +6,361 @@
     android:layout_height="match_parent"
     tools:context=".SelectIcon">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="fill_parent"
+        android:background="?colorPrimaryDark"
+        android:layout_height="?android:attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="91dp"
-        tools:layout_editor_absoluteY="258dp">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:layout_editor_absoluteX="91dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="30dp"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:padding="30dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
                 android:gravity="center"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:id="@+id/BedTimeIconButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginHorizontal="10dp"
                     android:gravity="center"
+                    android:onClick="iconClicked"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/ic_baseline_bedtime"/>
+                        android:src="@drawable/ic_baseline_bedtime" />
+
                     <TextView
                         android:layout_width="wrap_content"
-                        android:gravity="center"
                         android:layout_height="wrap_content"
-                        android:text="BedTime"/>
+                        android:gravity="center"
+                        android:text="BedTime" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/BiologyIconButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:onClick="iconClicked"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/ic_baseline_biology"/>
+                        android:src="@drawable/ic_baseline_biology" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Biology"/>
+                        android:text="Biology" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/BreakfastIconButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:gravity="center"
+                    android:onClick="iconClicked"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/ic_baseline_breakfast"/>
+                        android:src="@drawable/ic_baseline_breakfast" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Breakfast"/>
+                        android:text="Breakfast" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/ClockIconButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:gravity="center"
+                    android:onClick="iconClicked"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/ic_baseline_clock"/>
+                        android:src="@drawable/ic_baseline_clock" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Clock"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/CoronavirusIconButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/ic_baseline_coronavirus"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Corona"/>
+                        android:text="Clock" />
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
                 android:gravity="center"
                 android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/CoronavirusIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:onClick="iconClicked"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_baseline_coronavirus" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Corona" />
+                </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/FamilyTimeIconButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginHorizontal="10dp"
                     android:gravity="center"
+                    android:onClick="iconClicked"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/ic_baseline_family_time"/>
+                        android:src="@drawable/ic_baseline_family_time" />
+
                     <TextView
                         android:layout_width="wrap_content"
-                        android:gravity="center"
                         android:layout_height="wrap_content"
-                        android:text="Family"/>
+                        android:gravity="center"
+                        android:text="Family" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/FingerprintIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:onClick="iconClicked"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_baseline_fingerprint" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Security" />
+                </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/FoodIconButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:onClick="iconClicked"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/ic_baseline_food"/>
+                        android:src="@drawable/ic_baseline_food" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Food"/>
+                        android:text="Food" />
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
                 <LinearLayout
                     android:id="@+id/MathIconButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:gravity="center"
+                    android:onClick="iconClicked"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/ic_baseline_math"/>
+                        android:src="@drawable/ic_baseline_math" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Math"/>
+                        android:text="Math" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/MusicIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:onClick="iconClicked"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_baseline_music" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Music" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ScienceIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:onClick="iconClicked"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_baseline_science" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Science" />
+                </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/SportsIconButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:gravity="center"
+                    android:onClick="iconClicked"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/ic_baseline_sports"/>
+                        android:src="@drawable/ic_baseline_sports" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sports"/>
+                        android:text="Sports" />
                 </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/TypingIconButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/ic_baseline_typing"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Typing"/>
-                </LinearLayout>
+
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
                 android:gravity="center"
                 android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/TypingIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:onClick="iconClicked"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_baseline_typing" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Typing" />
+                </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/VideoGamesIconButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginHorizontal="10dp"
                     android:gravity="center"
+                    android:onClick="iconClicked"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/ic_baseline_videogames"/>
+                        android:src="@drawable/ic_baseline_videogames" />
+
                     <TextView
                         android:layout_width="wrap_content"
-                        android:gravity="center"
                         android:layout_height="wrap_content"
-                        android:text="Games"/>
+                        android:gravity="center"
+                        android:text="Games" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/WorkIconButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:onClick="iconClicked"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/ic_baseline_work"/>
+                        android:src="@drawable/ic_baseline_work" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Work"/>
+                        android:text="Work" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

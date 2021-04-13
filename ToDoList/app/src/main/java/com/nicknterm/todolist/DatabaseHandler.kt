@@ -13,7 +13,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         // Change DATABASE_VERSION every time you change the structure of the database
         // For example if you add another column, change the DATABASE_VERSION
         // Plus the onUpgrade function is going to get called so change that so the user doesn't loses all its data
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2
         private const val DATABASE_NAME = "ToDoListDatabase"
         private const val TABLE_NAME = "ToDoList"
 
@@ -25,16 +25,16 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         private const val KEY_TIME_START = "starts"
         private const val KEY_TIME_END = "ends"
         private const val KEY_TASK_COLOR = "color"
+        private const val KEY_ICON = "icon"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val sql = ("CREATE TABLE $TABLE_NAME ($KEY_ID INTEGER PRIMARY KEY, $KEY_ELEMENT_ID INT, $KEY_DAY TEXT, $KEY_TASK_NAME TEXT, $KEY_TIME_START TEXT, $KEY_TIME_END TEXT, $KEY_TASK_COLOR INT)")
+        val sql = ("CREATE TABLE $TABLE_NAME ($KEY_ID INTEGER PRIMARY KEY, $KEY_ELEMENT_ID INT, $KEY_DAY TEXT, $KEY_TASK_NAME TEXT, $KEY_TIME_START TEXT, $KEY_TIME_END TEXT, $KEY_TASK_COLOR INT, $KEY_ICON TEXT)")
         db?.execSQL(sql)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
-        onCreate(db)
+        db!!.execSQL("ALTER TABLE $TABLE_NAME ADD $KEY_ICON TEXT DEFAULT 'ic_baseline_biology';")
     }
 
     fun tasksInDay(day: String): ArrayList<FragmentRecycleViewItems>{
@@ -55,6 +55,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         var endTime: String
         var startTime: String
         var color: Int
+        var icon: String
+
         val finalList:ArrayList<FragmentRecycleViewItems> = ArrayList<FragmentRecycleViewItems>()
         if(cursor.moveToFirst()){
             do{
@@ -64,8 +66,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
                 endTime = cursor.getString(cursor.getColumnIndex(KEY_TIME_END))
                 startTime = cursor.getString(cursor.getColumnIndex(KEY_TIME_START))
                 color = cursor.getInt(cursor.getColumnIndex(KEY_TASK_COLOR))
+                icon = cursor.getString(cursor.getColumnIndex(KEY_ICON))
 
-                val item = FragmentRecycleViewItems(localId, name, startTime, endTime, day, color)
+                val item = FragmentRecycleViewItems(localId, name, startTime, endTime, day, color, icon)
                 finalList.add(item)
             }while(cursor.moveToNext())
         }
@@ -82,6 +85,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         contentValues.put(KEY_TIME_END, item.getTimeEnd())
         contentValues.put(KEY_TIME_START, item.getTimeStart())
         contentValues.put(KEY_TASK_COLOR, item.getColor())
+        contentValues.put(KEY_ICON, item.getIcon())
 
         val success = db.insert(TABLE_NAME, null, contentValues)
         db.close()
@@ -98,6 +102,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         values.put(KEY_TIME_END, item.getTimeEnd())
         values.put(KEY_TIME_START, item.getTimeStart())
         values.put(KEY_TASK_COLOR, item.getColor())
+        values.put(KEY_ICON, item.getIcon())
 
         val db = this.writableDatabase
         db.update(TABLE_NAME, values, "$KEY_DAY='$day' AND $KEY_ELEMENT_ID=$id", arrayOf())

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
@@ -27,6 +28,7 @@ class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleVie
         val editButton: TextView = view.EditItemButton
         val buttonLL: LinearLayout = view.buttonLL
         val endTimeText: TextView = view.EndTimeItemText
+        val iconImage: ImageView = view.ItemIcon
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,6 +41,9 @@ class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleVie
         holder.timeText.text = "${item.getTimeStart()}"
         holder.endTimeText.text = "${item.getTimeEnd()}"
         holder.nameText.text = item.getName()
+        val iconName = item.getIcon()
+        holder.iconImage.setImageResource(holder.itemView.context.resources.getIdentifier(iconName,"drawable", "com.nicknterm.todolist"))
+
         if (openedTask != position) {
             holder.buttonLL.animate()
                     .x(holder.buttonLL.width.toFloat())
