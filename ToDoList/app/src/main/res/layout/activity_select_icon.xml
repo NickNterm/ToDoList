@@ -74,6 +74,25 @@
                         android:layout_height="wrap_content"
                         android:text="Biology" />
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/BookIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:onClick="iconClicked"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_baseline_book" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Book" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/BreakfastIconButton"
@@ -95,6 +114,15 @@
                         android:text="Breakfast" />
                 </LinearLayout>
 
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
                 <LinearLayout
                     android:id="@+id/ClockIconButton"
                     android:layout_width="wrap_content"
@@ -114,15 +142,25 @@
                         android:layout_height="wrap_content"
                         android:text="Clock" />
                 </LinearLayout>
-            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ComputerIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:onClick="iconClicked"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_baseline_computer" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cumputer" />
+                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/CoronavirusIconButton"
                     android:layout_width="wrap_content"
@@ -164,6 +202,15 @@
                         android:text="Family" />
                 </LinearLayout>
 
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
                 <LinearLayout
                     android:id="@+id/FingerprintIconButton"
                     android:layout_width="wrap_content"
@@ -204,15 +251,6 @@
                         android:layout_height="wrap_content"
                         android:text="Food" />
                 </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
                 <LinearLayout
                     android:id="@+id/MathIconButton"
                     android:layout_width="wrap_content"
@@ -253,6 +291,35 @@
                         android:text="Music" />
                 </LinearLayout>
 
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/NatureIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:onClick="iconClicked"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_baseline_nature" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nature" />
+                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/ScienceIconButton"
                     android:layout_width="wrap_content"
@@ -292,16 +359,6 @@
                         android:layout_height="wrap_content"
                         android:text="Sports" />
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
                 <LinearLayout
                     android:id="@+id/TypingIconButton"
                     android:layout_width="wrap_content"
@@ -322,6 +379,33 @@
                         android:text="Typing" />
                 </LinearLayout>
 
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/WarningIconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:onClick="iconClicked"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_baseline_warning" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Warning" />
+                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/VideoGamesIconButton"
                     android:layout_width="wrap_content"
@@ -362,6 +446,7 @@
                         android:layout_height="wrap_content"
                         android:text="Work" />
                 </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
