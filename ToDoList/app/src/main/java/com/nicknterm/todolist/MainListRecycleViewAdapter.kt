@@ -1,7 +1,5 @@
 package com.nicknterm.todolist
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -13,10 +11,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
-import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.google.android.material.internal.ContextUtils.getActivity
 import kotlinx.android.synthetic.main.main_recycle_view_item.view.*
+
 
 class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleViewItems>, private val context: Context) :
         RecyclerView.Adapter<MainListRecycleViewAdapter.ViewHolder>() {
@@ -33,6 +32,7 @@ class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleVie
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.main_recycle_view_item, parent, false))
     }
 
@@ -43,38 +43,23 @@ class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleVie
         holder.endTimeText.text = "${item.getTimeEnd()}"
         holder.nameText.text = item.getName()
         val iconName = item.getIcon()
-        holder.iconImage.setImageResource(holder.itemView.context.resources.getIdentifier(iconName,"drawable", "com.nicknterm.todolist"))
+        holder.iconImage.setImageResource(holder.itemView.context.resources.getIdentifier(iconName, "drawable", "com.nicknterm.todolist"))
         if (openedTask != position) {
-            holder.buttonLL.animate()
-                    .x(holder.buttonLL.width.toFloat())
-                    .duration = 1
             holder.buttonLL.visibility = View.GONE
-
         } else {
             holder.buttonLL.visibility = View.VISIBLE
-
-            holder.buttonLL.translationX = holder.buttonLL.width.toFloat()
-            holder.buttonLL.animate()
-                    .translationX(0f)
-                    .duration = 300
         }
         if (item.getColor() != null) {
-           // holder.mainLL.setBackgroundResource(color!!)
             holder.mainLL.setBackgroundColor(Color.parseColor(item.getColor()))
         }
         holder.mainLL.setOnClickListener {
             if (holder.buttonLL.visibility == View.VISIBLE) {
                 openedTask = -1
-
-                holder.buttonLL.animate()
-                        .translationX(holder.buttonLL.width.toFloat())
-                        .withEndAction {
-                            holder.buttonLL.visibility = View.GONE
-                            notifyDataSetChanged()
-                        }.duration = 300
+                notifyItemChanged(position)
             } else {
+                notifyItemChanged(openedTask)
                 openedTask = position
-                notifyDataSetChanged()
+                notifyItemChanged(position)
             }
         }
         holder.editButton.setOnClickListener {
