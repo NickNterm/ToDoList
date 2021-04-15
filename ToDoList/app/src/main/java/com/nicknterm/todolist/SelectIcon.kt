@@ -46,7 +46,6 @@ class SelectIcon : AppCompatActivity() {
         item = intent.getParcelableExtra("ItemToAdd")
     }
     fun iconClicked(view: View){
-        Toast.makeText(this,resources.getResourceEntryName(view.id),Toast.LENGTH_SHORT).show()
         when(resources.getResourceEntryName(view.id)){
             "BedTimeIconButton" -> item!!.setIcon("ic_baseline_bedtime")
             "BiologyIconButton" -> item!!.setIcon("ic_baseline_biology")

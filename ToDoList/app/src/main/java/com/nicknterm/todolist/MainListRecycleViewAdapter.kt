@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +44,6 @@ class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleVie
         holder.nameText.text = item.getName()
         val iconName = item.getIcon()
         holder.iconImage.setImageResource(holder.itemView.context.resources.getIdentifier(iconName,"drawable", "com.nicknterm.todolist"))
-
         if (openedTask != position) {
             holder.buttonLL.animate()
                     .x(holder.buttonLL.width.toFloat())
@@ -58,9 +58,9 @@ class MainListRecycleViewAdapter(private val items: ArrayList<FragmentRecycleVie
                     .translationX(0f)
                     .duration = 300
         }
-        if (item.getColor() != 1) {
-            val color = item.getColor()
-            holder.mainLL.setBackgroundResource(color!!)
+        if (item.getColor() != null) {
+           // holder.mainLL.setBackgroundResource(color!!)
+            holder.mainLL.setBackgroundColor(Color.parseColor(item.getColor()))
         }
         holder.mainLL.setOnClickListener {
             if (holder.buttonLL.visibility == View.VISIBLE) {

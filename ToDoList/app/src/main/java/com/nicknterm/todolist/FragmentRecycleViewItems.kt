@@ -3,10 +3,11 @@ package com.nicknterm.todolist
 import android.os.Parcel
 import android.os.Parcelable
 
-class FragmentRecycleViewItems(private var id: Int, private var Name: String?, private var TimeStart: String?, private var TimeEnd: String?, private var Day: String?, private var Color: Int, private var Icon: String?):Parcelable {
+class FragmentRecycleViewItems(private var id: Int, private var Name: String?, private var TimeStart: String?, private var TimeEnd: String?, private var Day: String?, private var Icon: String?, private var Notify: Int, private var HexColor: String?):Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -35,12 +36,17 @@ class FragmentRecycleViewItems(private var id: Int, private var Name: String?, p
         return Day
     }
 
-    fun getColor(): Int?{
-        return Color
-    }
 
     fun getIcon(): String? {
         return Icon
+    }
+
+    fun getNotify(): Int{
+        return Notify
+    }
+
+    fun getColor():String? {
+        return HexColor
     }
 
     fun setId(v: Int){
@@ -63,14 +69,17 @@ class FragmentRecycleViewItems(private var id: Int, private var Name: String?, p
         Day = v
     }
 
-    fun setColor(v: Int){
-        Color = v
-    }
-
     fun setIcon(v: String){
         Icon = v
     }
 
+    fun setNotify(v: Int){
+        Notify = v
+    }
+
+    fun setColor(v: String){
+        HexColor = v
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
@@ -78,8 +87,9 @@ class FragmentRecycleViewItems(private var id: Int, private var Name: String?, p
         parcel.writeString(TimeStart)
         parcel.writeString(TimeEnd)
         parcel.writeString(Day)
-        parcel.writeInt(Color)
         parcel.writeString(Icon)
+        parcel.writeInt(Notify)
+        parcel.writeString(HexColor)
     }
 
     override fun describeContents(): Int {

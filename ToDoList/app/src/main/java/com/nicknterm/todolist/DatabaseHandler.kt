@@ -13,7 +13,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         // Change DATABASE_VERSION every time you change the structure of the database
         // For example if you add another column, change the DATABASE_VERSION
         // Plus the onUpgrade function is going to get called so change that so the user doesn't loses all its data
-        private const val DATABASE_VERSION = 2
+        private const val DATABASE_VERSION = 4
         private const val DATABASE_NAME = "ToDoListDatabase"
         private const val TABLE_NAME = "ToDoList"
 
@@ -24,18 +24,19 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         private const val KEY_TASK_NAME = "name"
         private const val KEY_TIME_START = "starts"
         private const val KEY_TIME_END = "ends"
-        private const val KEY_TASK_COLOR = "color"
+        private const val KEY_COLOR = "color"
         private const val KEY_ICON = "icon"
+        private const val KEY_NOTIFY = "notify"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val sql = ("CREATE TABLE $TABLE_NAME ($KEY_ID INTEGER PRIMARY KEY, $KEY_ELEMENT_ID INT, $KEY_DAY TEXT, $KEY_TASK_NAME TEXT, $KEY_TIME_START TEXT, $KEY_TIME_END TEXT, $KEY_TASK_COLOR INT, $KEY_ICON TEXT)")
+        val sql = ("CREATE TABLE $TABLE_NAME ($KEY_ID INTEGER PRIMARY KEY, $KEY_ELEMENT_ID INT, $KEY_DAY TEXT, $KEY_TASK_NAME TEXT, $KEY_TIME_START TEXT, $KEY_TIME_END TEXT, $KEY_ICON TEXT, $KEY_NOTIFY INT, $KEY_COLOR TEXT)")
         db?.execSQL(sql)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db!!.execSQL("ALTER TABLE $TABLE_NAME ADD $KEY_ICON TEXT DEFAULT 'ic_baseline_biology';")
     }
+
 
     fun tasksInDay(day: String): ArrayList<FragmentRecycleViewItems>{
         val sql = ("SELECT * FROM $TABLE_NAME WHERE $KEY_DAY='$day'")
@@ -56,6 +57,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         var startTime: String
         var color: Int
         var icon: String
+        var notify: Int
+        var hexColor: String
 
         val finalList:ArrayList<FragmentRecycleViewItems> = ArrayList<FragmentRecycleViewItems>()
         if(cursor.moveToFirst()){
@@ -65,10 +68,11 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
                 name = cursor.getString(cursor.getColumnIndex(KEY_TASK_NAME))
                 endTime = cursor.getString(cursor.getColumnIndex(KEY_TIME_END))
                 startTime = cursor.getString(cursor.getColumnIndex(KEY_TIME_START))
-                color = cursor.getInt(cursor.getColumnIndex(KEY_TASK_COLOR))
                 icon = cursor.getString(cursor.getColumnIndex(KEY_ICON))
+                notify = cursor.getInt(cursor.getColumnIndex(KEY_NOTIFY))
+                hexColor = cursor.getString(cursor.getColumnIndex(KEY_COLOR))
 
-                val item = FragmentRecycleViewItems(localId, name, startTime, endTime, day, color, icon)
+                val item = FragmentRecycleViewItems(localId, name, startTime, endTime, day, icon, notify, hexColor)
                 finalList.add(item)
             }while(cursor.moveToNext())
         }
@@ -84,8 +88,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         contentValues.put(KEY_TASK_NAME, item.getName())
         contentValues.put(KEY_TIME_END, item.getTimeEnd())
         contentValues.put(KEY_TIME_START, item.getTimeStart())
-        contentValues.put(KEY_TASK_COLOR, item.getColor())
         contentValues.put(KEY_ICON, item.getIcon())
+        contentValues.put(KEY_NOTIFY, item.getNotify())
+        contentValues.put(KEY_COLOR, item.getColor())
 
         val success = db.insert(TABLE_NAME, null, contentValues)
         db.close()
@@ -101,8 +106,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         values.put(KEY_TASK_NAME, item.getName())
         values.put(KEY_TIME_END, item.getTimeEnd())
         values.put(KEY_TIME_START, item.getTimeStart())
-        values.put(KEY_TASK_COLOR, item.getColor())
         values.put(KEY_ICON, item.getIcon())
+        values.put(KEY_NOTIFY, item.getNotify())
+        values.put(KEY_COLOR, item.getColor())
 
         val db = this.writableDatabase
         db.update(TABLE_NAME, values, "$KEY_DAY='$day' AND $KEY_ELEMENT_ID=$id", arrayOf())

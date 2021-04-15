@@ -93,7 +93,7 @@ class ColorPicker : AppCompatActivity() {
     }
     private fun goToAddTask(){
         val intent = Intent(this, AddTasksInRecycleView::class.java)
-        finalColor?.let { item?.setColor(it) }
+        item?.setColor(resources.getString(finalColor!!))
         intent.putExtra("Day", item?.getDay())
         intent.putExtra("ItemToAdd", item)
         intent.putExtra("Mode", mode)
