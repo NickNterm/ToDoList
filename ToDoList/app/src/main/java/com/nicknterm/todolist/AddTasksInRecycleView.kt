@@ -80,6 +80,11 @@ class AddTasksInRecycleView : AppCompatActivity() {
                             .setTextColor(resources.getColor(R.color.white))
                             .setBackgroundTint(resources.getColor(R.color.PrimaryBackgroundDark))
                             .show()
+                }else if(mainItem!!.getIcon()==null) {
+                    Snackbar.make(it,"Select a Icon", Snackbar.LENGTH_LONG)
+                            .setTextColor(resources.getColor(R.color.white))
+                            .setBackgroundTint(resources.getColor(R.color.PrimaryBackgroundDark))
+                            .show()
                 } else {
                     val item = FragmentRecycleViewItems(elementId!!, mainItem?.getName(), mainItem?.getTimeStart(), mainItem?.getTimeEnd(), day!!, mainItem?.getIcon(), mainItem?.getNotify()!!, mainItem?.getColor())
                     dbHandler!!.addTaskInDay(item)
