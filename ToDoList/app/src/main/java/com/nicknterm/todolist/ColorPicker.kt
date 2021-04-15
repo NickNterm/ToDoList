@@ -26,6 +26,8 @@ class ColorPicker : AppCompatActivity() {
             "cyan" -> setTheme(R.style.MyTheme_light_cyan)
             "primaryCyan" -> setTheme(R.style.MyTheme_cyan)
             "blue" -> setTheme(R.style.MyTheme_blue)
+            "purple" -> setTheme(R.style.MyTheme_purple)
+            else -> setTheme(R.style.MyTheme_cyan)
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_color_picker)
@@ -69,6 +71,11 @@ class ColorPicker : AppCompatActivity() {
             ColorPickerYellow.setBackgroundResource(R.drawable.color_selected_in_color_picker)
             finalColor = R.color.yellow
         }
+        ColorPickerPurple.setOnClickListener {
+            deselectAll()
+            ColorPickerPurple.setBackgroundResource(R.drawable.color_selected_in_color_picker)
+            finalColor = R.color.purple
+        }
         ColorPickerSelect.setOnClickListener {
             goToAddTask(it)
         }
@@ -87,7 +94,6 @@ class ColorPicker : AppCompatActivity() {
                     }
                     .show()
         }
-
     }
 
     override fun onBackPressed() {
@@ -124,6 +130,7 @@ class ColorPicker : AppCompatActivity() {
         ColorPickerLime.setBackgroundResource(0)
         ColorPickerOrange.setBackgroundResource(0)
         ColorPickerYellow.setBackgroundResource(0)
+        ColorPickerPurple.setBackgroundResource(0)
         item?.setColor(null)
     }
 

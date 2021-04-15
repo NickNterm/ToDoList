@@ -18,6 +18,7 @@
         <item>Light-Cyan</item>
         <item>Cyan</item>
         <item>Blue</item>
+        <item>Purple</item>
     </string-array>
     <string-array name="Color_values">
         <item>red</item>
@@ -28,5 +29,6 @@
         <item>cyan</item>
         <item>primaryCyan</item>
         <item>blue</item>
+        <item>purple</item>
     </string-array>
 </resources>

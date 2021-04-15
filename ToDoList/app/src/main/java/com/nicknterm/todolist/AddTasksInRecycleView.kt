@@ -36,6 +36,8 @@ class AddTasksInRecycleView : AppCompatActivity() {
             "cyan" -> setTheme(R.style.MyTheme_light_cyan)
             "primaryCyan" -> setTheme(R.style.MyTheme_cyan)
             "blue" -> setTheme(R.style.MyTheme_blue)
+            "purple" -> setTheme(R.style.MyTheme_purple)
+            else -> setTheme(R.style.MyTheme_cyan)
         }
 
         super.onCreate(savedInstanceState)
@@ -174,8 +176,8 @@ class AddTasksInRecycleView : AppCompatActivity() {
     @SuppressLint("ResourceAsColor")
     fun refreshUI(){
         if(mainItem?.getTimeStart() == null) {
-            mainItem?.setTimeStart(String.format("%02d:%02d",dbHandler!!.getLastTaskEndTime(day!!).split(":")[0].toInt(),dbHandler!!.getLastTaskEndTime(day!!).split(":")[1].toInt()))
-            StartTimeTextView.text = String.format("%02d:%02d",dbHandler!!.getLastTaskEndTime(day!!).split(":")[0].toInt(),dbHandler!!.getLastTaskEndTime(day!!).split(":")[1].toInt())
+            mainItem?.setTimeStart(String.format("%02d:%02d", dbHandler!!.getLastTaskEndTime(day!!).split(":")[0].toInt(), dbHandler!!.getLastTaskEndTime(day!!).split(":")[1].toInt()))
+            StartTimeTextView.text = String.format("%02d:%02d", dbHandler!!.getLastTaskEndTime(day!!).split(":")[0].toInt(), dbHandler!!.getLastTaskEndTime(day!!).split(":")[1].toInt())
         }else{
             StartTimeTextView.text = mainItem!!.getTimeStart()
         }

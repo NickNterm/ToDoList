@@ -20,6 +20,8 @@ class SettingsActivity : AppCompatActivity() {
             "cyan" -> setTheme(R.style.MyTheme_light_cyan)
             "primaryCyan" -> setTheme(R.style.MyTheme_cyan)
             "blue" -> setTheme(R.style.MyTheme_blue)
+            "purple" -> setTheme(R.style.MyTheme_purple)
+            else -> setTheme(R.style.MyTheme_cyan)
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)

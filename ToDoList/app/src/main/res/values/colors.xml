@@ -31,4 +31,6 @@
     <color name="cyanDark">#1D7171</color>
     <color name="blue">#3366ff</color>
     <color name="blueDark">#1C398E</color>
+    <color name="purple">#8b48ff</color>
+    <color name="purpleDark">#512C8F</color>
 </resources>

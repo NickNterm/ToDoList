@@ -1,7 +1,8 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory app:title="Theme">
         <ListPreference
-            app:defaultValue="Cyan"
+            app:defaultValue="true"
             app:entries="@array/Colors"
             app:entryValues="@array/Color_values"
             app:key="color"
