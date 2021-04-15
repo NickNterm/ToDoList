@@ -1,11 +1,14 @@
 package com.nicknterm.todolist
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.preference.PreferenceManager
 import com.github.dhaval2404.colorpicker.ColorPickerDialog
 import com.github.dhaval2404.colorpicker.model.ColorShape
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_color_picker.*
 
 class ColorPicker : AppCompatActivity() {
@@ -67,7 +70,7 @@ class ColorPicker : AppCompatActivity() {
             finalColor = R.color.yellow
         }
         ColorPickerSelect.setOnClickListener {
-            goToAddTask()
+            goToAddTask(it)
         }
         ColorPickerCustom.setOnClickListener {
             ColorPickerDialog
@@ -76,7 +79,11 @@ class ColorPicker : AppCompatActivity() {
                     .setColorShape(ColorShape.SQAURE)   // Default ColorShape.CIRCLE
                     .setDefaultColor("#000000")     // Pass Default Color
                     .setColorListener { color, colorHex ->
-                        // Handle Color Selection
+                        deselectAll()
+                        ColorPickerCustom.setBackgroundResource(R.drawable.color_selected_in_color_picker)
+                        ColorPickerCustom.setBackgroundColor(Color.parseColor(colorHex))
+                        finalColor = null
+                        item?.setColor(colorHex)
                     }
                     .show()
         }
@@ -91,14 +98,23 @@ class ColorPicker : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-    private fun goToAddTask(){
+    private fun goToAddTask(v: View){
         val intent = Intent(this, AddTasksInRecycleView::class.java)
-        item?.setColor(resources.getString(finalColor!!))
-        intent.putExtra("Day", item?.getDay())
-        intent.putExtra("ItemToAdd", item)
-        intent.putExtra("Mode", mode)
-        startActivity(intent)
-        finish()
+        if(item?.getColor()==null && finalColor!= null) {
+            item?.setColor(resources.getString(finalColor!!))
+        }
+        if(item?.getColor()!=null) {
+            intent.putExtra("Day", item?.getDay())
+            intent.putExtra("ItemToAdd", item)
+            intent.putExtra("Mode", mode)
+            startActivity(intent)
+            finish()
+        }else{
+            Snackbar.make(v,"Select a color", Snackbar.LENGTH_LONG)
+                    .setTextColor(resources.getColor(R.color.white))
+                    .setBackgroundTint(resources.getColor(R.color.PrimaryBackgroundDark))
+                    .show()
+        }
     }
     private fun deselectAll(){
         ColorPickerRed.setBackgroundResource(0)
@@ -108,6 +124,7 @@ class ColorPicker : AppCompatActivity() {
         ColorPickerLime.setBackgroundResource(0)
         ColorPickerOrange.setBackgroundResource(0)
         ColorPickerYellow.setBackgroundResource(0)
+        item?.setColor(null)
     }
 
     override fun onSupportNavigateUp(): Boolean {

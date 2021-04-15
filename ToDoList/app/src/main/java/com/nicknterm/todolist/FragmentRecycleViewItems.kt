@@ -77,7 +77,7 @@ class FragmentRecycleViewItems(private var id: Int, private var Name: String?, p
         Notify = v
     }
 
-    fun setColor(v: String){
+    fun setColor(v: String?){
         HexColor = v
     }
 

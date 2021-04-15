@@ -19,9 +19,9 @@
     <color name="whiteBackground">#E8E8E8</color>
     <color name="red">#cc0000</color>
     <color name="redDark">#570000</color>
-    <color name="orange">#e65c00 </color>
+    <color name="orange">#ff6d3a</color>
     <color name="orangeDark">#883700</color>
-    <color name="yellow">#cccc00</color>
+    <color name="yellow">#ffc947</color>
     <color name="yellowDark">#808000</color>
     <color name="green">#009900 </color>
     <color name="greenDark">#005900</color>
