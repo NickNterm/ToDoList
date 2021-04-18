@@ -140,6 +140,35 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="10dp">
+        <LinearLayout
+            android:id="@+id/llNotificationCardView"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="?colorPrimaryDark"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            android:gravity="center">
+            <TextView
+                android:text="NOTIFICATION"
+                android:textColor="?android:textColor"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content"/>
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                style="@style/Widget.AppCompat.CompoundButton.Switch"
+                android:id="@+id/Switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                app:useMaterialThemeColors="false" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
         android:id="@+id/SaveCardView"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="20dp"

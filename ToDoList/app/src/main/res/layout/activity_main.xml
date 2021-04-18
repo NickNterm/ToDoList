@@ -5,51 +5,75 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/MainActivityToolBar"
-            app:titleTextColor="?android:textColor"
             android:layout_width="match_parent"
-            android:background="?colorPrimaryDark"
             android:layout_height="?android:attr/actionBarSize"
-            android:gravity="right"
-            app:layout_constraintTop_toTopOf="parent" >
-            <ImageButton
-                android:id="@+id/SettingsButton"
-                android:background="?colorPrimaryDark"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_settings_24"/>
+            android:background="?colorPrimaryDark"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="?android:textColor">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ToDoList"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/SettingsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?colorPrimaryDark"
+                    android:paddingHorizontal="20dp"
+                    android:layout_gravity="right"
+                    android:paddingVertical="5dp"
+                    android:src="@drawable/ic_baseline_settings_24" />
+            </LinearLayout>
+            </LinearLayout>
         </com.google.android.material.appbar.MaterialToolbar>
 
         <com.google.android.material.tabs.TabLayout
-            android:background="?colorPrimaryDark"
             android:id="@+id/MainActivityTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="?android:textColor"
-            app:tabMode="auto"
-            app:tabSelectedTextColor="?android:colorAccent"
-            app:tabRippleColor="?android:colorAccent"
+            android:background="?colorPrimaryDark"
+            app:layout_constraintTop_toBottomOf="@+id/MainActivityToolBar"
             app:tabGravity="fill"
-            app:layout_constraintTop_toBottomOf="@+id/MainActivityToolBar" />
+            app:tabMode="auto"
+            app:tabRippleColor="?android:colorAccent"
+            app:tabSelectedTextColor="?android:colorAccent"
+            app:tabTextColor="?android:textColor" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/MainActivityViewPager"
-            android:background="?background"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="?background" />
     </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/AddButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="20dp"
-        android:src="@drawable/add_icon"/>
+        android:src="@drawable/add_icon" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

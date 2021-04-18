@@ -46,6 +46,9 @@ class AddTasksInRecycleView : AppCompatActivity() {
         mode = intent.getStringExtra("Mode")
         day = intent.getStringExtra("Day")
         mainItem = intent.getParcelableExtra("ItemToAdd")
+        if(mainItem == null) {
+            mainItem =FragmentRecycleViewItems(0,null,null,null,null,null,0,null)
+        }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.title = "Add Task In $day"
@@ -103,13 +106,13 @@ class AddTasksInRecycleView : AppCompatActivity() {
                 if(mainItem != null) {
                     FragmentRecycleViewItems(mainItem!!.getId(), NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, mainItem?.getIcon(),mainItem?.getNotify()!!, mainItem?.getColor())
                 }else{
-                    FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, mainItem?.getIcon(), 0, mainItem?.getColor())
+                    FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, mainItem?.getIcon(), mainItem?.getNotify()!!, mainItem?.getColor())
                 }
             } else{
                 if(mainItem != null) {
                     FragmentRecycleViewItems(mainItem!!.getId(), NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, mainItem?.getIcon(), mainItem?.getNotify()!!, mainItem?.getColor())
                 }else{
-                    FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day,mainItem?.getIcon(), 0, mainItem?.getColor())
+                    FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day,mainItem?.getIcon(), mainItem?.getNotify()!!, mainItem?.getColor())
                 }
             }
             intent.putExtra("ItemToAdd", item)
@@ -157,13 +160,13 @@ class AddTasksInRecycleView : AppCompatActivity() {
                 if(mainItem != null) {
                     FragmentRecycleViewItems(mainItem!!.getId(), NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day,mainItem?.getIcon(), mainItem?.getNotify()!!, mainItem?.getColor())
                 }else{
-                    FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, mainItem?.getIcon(), 0, mainItem?.getColor())
+                    FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day, mainItem?.getIcon(), mainItem?.getNotify()!!, mainItem?.getColor())
                 }
             } else{
                 if(mainItem != null) {
                     FragmentRecycleViewItems(mainItem!!.getId(), NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day,mainItem?.getIcon(), mainItem?.getNotify()!!, mainItem?.getColor())
                 }else{
-                    FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day,mainItem?.getIcon(), 0, mainItem?.getColor())
+                    FragmentRecycleViewItems(0, NameEditText.text.toString(), StartTimeTextView.text.toString(), EndTimeTextView.text.toString(), day,mainItem?.getIcon(), mainItem?.getNotify()!!, mainItem?.getColor())
                 }
             }
             intent.putExtra("ItemToAdd", item)
@@ -171,6 +174,7 @@ class AddTasksInRecycleView : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        Switch.setOnCheckedChangeListener { buttonView, isChecked -> if(isChecked){mainItem?.setNotify(1)}else{mainItem?.setNotify(0)} }
     }
 
     @SuppressLint("ResourceAsColor")
@@ -199,6 +203,7 @@ class AddTasksInRecycleView : AppCompatActivity() {
         if(mainItem?.getIcon() != null){
             AddTaskIcon.setImageResource(resources.getIdentifier(mainItem?.getIcon(),"drawable", "com.nicknterm.todolist"))
         }
+        Switch.isChecked = mainItem?.getNotify() == 1
         if (mode == "Edit"){
             DeleteCardView.visibility = View.VISIBLE
             EditCardView.visibility = View.VISIBLE
