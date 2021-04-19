@@ -9,7 +9,14 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoList">
-        <activity android:name=".SelectIcon"
+        <receiver android:name=".NotificationActivity" android:enabled="true">
+            <intent-filter>
+                <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
+                <action android:name="com.nicknterm.todolist.notification" />
+            </intent-filter>
+        </receiver>
+        <activity
+            android:name=".SelectIcon"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsActivity"

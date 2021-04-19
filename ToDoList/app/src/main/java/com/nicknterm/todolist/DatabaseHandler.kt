@@ -38,6 +38,47 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     }
 
 
+    fun getNotificationItems(): ArrayList<FragmentRecycleViewItems>{
+        val sql = ("SELECT * FROM $TABLE_NAME WHERE $KEY_NOTIFY=1")
+        val db = this.readableDatabase
+        val cursor: Cursor
+
+        try{
+            cursor = db.rawQuery(sql, null)
+        } catch (e: SQLException){
+            db.execSQL(sql)
+            return ArrayList()
+        }
+
+        //var id:Int
+        var day: String
+        var localId: Int
+        var name: String
+        var endTime: String
+        var startTime: String
+        var icon: String
+        var notify: Int
+        var hexColor: String
+
+        val finalList:ArrayList<FragmentRecycleViewItems> = ArrayList<FragmentRecycleViewItems>()
+        if(cursor.moveToFirst()){
+            do{
+                day = cursor.getString(cursor.getColumnIndex(KEY_DAY))
+                localId = cursor.getInt(cursor.getColumnIndex(KEY_ELEMENT_ID))
+                name = cursor.getString(cursor.getColumnIndex(KEY_TASK_NAME))
+                endTime = cursor.getString(cursor.getColumnIndex(KEY_TIME_END))
+                startTime = cursor.getString(cursor.getColumnIndex(KEY_TIME_START))
+                icon = cursor.getString(cursor.getColumnIndex(KEY_ICON))
+                notify = cursor.getInt(cursor.getColumnIndex(KEY_NOTIFY))
+                hexColor = cursor.getString(cursor.getColumnIndex(KEY_COLOR))
+
+                val item = FragmentRecycleViewItems(localId, name, startTime, endTime, day, icon, notify, hexColor)
+                finalList.add(item)
+            }while(cursor.moveToNext())
+        }
+        return finalList
+    }
+
     fun tasksInDay(day: String): ArrayList<FragmentRecycleViewItems>{
         val sql = ("SELECT * FROM $TABLE_NAME WHERE $KEY_DAY='$day'")
         val db = this.readableDatabase
@@ -55,7 +96,6 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         var name: String
         var endTime: String
         var startTime: String
-        var color: Int
         var icon: String
         var notify: Int
         var hexColor: String
