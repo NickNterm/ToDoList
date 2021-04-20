@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         dayToStart = if (intent.getStringExtra("Day") != null) {
@@ -161,20 +160,18 @@ class MainActivity : AppCompatActivity() {
             val cal = Calendar.getInstance()
             Log.i(
                 "Mymsg",
-                "Date First ${task.getName()} ${
-                    SimpleDateFormat.getDateTimeInstance().format(cal.time)
-                } (${cal.get(Calendar.DAY_OF_WEEK)})"
+                "id $id"
             )
             cal.set(Calendar.HOUR, task.getTimeStart()!!.split(":")[0].toInt())
             cal.set(Calendar.MINUTE, task.getTimeStart()!!.split(":")[1].toInt())
             cal.set(Calendar.SECOND, 0)
 
-            Log.i(
+            /*Log.i(
                 "Mymsg",
                 "Date second ${task.getName()} ${
                     SimpleDateFormat.getDateTimeInstance().format(cal.time)
                 } Day of Week(${cal.get(Calendar.DAY_OF_WEEK)}) Day of Task(${(dayToInt(task.getDay()!!) + 2)})"
-            )
+            )*/
             var dayInt = (dayToInt(task.getDay()!!) + 2) % 7
             if(dayInt == 0) { dayInt = 7}
             if (dayInt < cal.get(Calendar.DAY_OF_WEEK)) {
@@ -187,36 +184,48 @@ class MainActivity : AppCompatActivity() {
 
             var finalMillis: Long = cal.timeInMillis - Calendar.getInstance().timeInMillis
             if (finalMillis > 0) {
-                Log.i(
+                /*Log.i(
                     "Mymsg",
                     "Date ${
                         SimpleDateFormat.getDateTimeInstance().format(cal.time)
                     } (${cal.get(Calendar.DAY_OF_WEEK)})"
                 )
+                Log.i("Mymsg", "time before $minutesToNotify and millis $finalMillis")*/
+
                 Log.i("Mymsg", "time before $minutesToNotify and millis $finalMillis")
-                val intent = Intent(this, NotificationActivity::class.java)
-                val bundle = Bundle()
-                bundle.putSerializable("id", id)
-                bundle.putParcelable("task", task)
-                intent.putExtra("bundle", bundle)
-                val pendingIntent =
-                    PendingIntent.getBroadcast(this, id , intent, 0)
-                alarmManager.setExact(
-                    AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime() + finalMillis - (minutesToNotify * 60 * 1000),
-                    pendingIntent
-                )
             }else{
                 cal.add(Calendar.DAY_OF_MONTH, 7)
-                Log.i(
+                /*Log.i(
                     "Mymsg",
                     "Date ${
                         SimpleDateFormat.getDateTimeInstance().format(cal.time)
                     } (${cal.get(Calendar.DAY_OF_WEEK)})"
-                )
+                )*/
                 finalMillis = cal.timeInMillis - Calendar.getInstance().timeInMillis
                 Log.i("Mymsg", "time before $minutesToNotify and millis $finalMillis")
             }
+            val intent = Intent(this, NotificationActivity::class.java)
+            val bundle = Bundle()
+            bundle.putSerializable("id", id)
+            bundle.putParcelable("task", task)
+            intent.putExtra("bundle", bundle)
+            val pendingIntent =
+                PendingIntent.getBroadcast(this, id , intent, 0)
+            alarmManager.setExact(
+                AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + finalMillis - (minutesToNotify * 60 * 1000),
+                pendingIntent
+            )
+        }
+    }
+    private fun cancelAlarmManager(){
+        val myDB = DatabaseHandler(this)
+        val tasks = myDB.getNotificationItems()
+        val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
+        for (i in 0..tasks.size) {
+            val intent = Intent(this, NotificationActivity::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(this, i, intent, 0)
+            alarmManager.cancel(pendingIntent)
         }
     }
 

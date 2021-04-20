@@ -9,10 +9,10 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.nicknterm.todolist"
+        applicationId 'com.nicknterm.todolist'
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 1
+        versionCode 2
         versionName "2.3"
 
         vectorDrawables.useSupportLibrary = true
@@ -21,7 +21,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
