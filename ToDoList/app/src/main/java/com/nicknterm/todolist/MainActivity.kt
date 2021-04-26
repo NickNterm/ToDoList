@@ -162,16 +162,11 @@ class MainActivity : AppCompatActivity() {
                 "Mymsg",
                 "id $id"
             )
-            cal.set(Calendar.HOUR, task.getTimeStart()!!.split(":")[0].toInt())
+
+            cal.set(Calendar.HOUR_OF_DAY, task.getTimeStart()!!.split(":")[0].toInt())
             cal.set(Calendar.MINUTE, task.getTimeStart()!!.split(":")[1].toInt())
             cal.set(Calendar.SECOND, 0)
 
-            /*Log.i(
-                "Mymsg",
-                "Date second ${task.getName()} ${
-                    SimpleDateFormat.getDateTimeInstance().format(cal.time)
-                } Day of Week(${cal.get(Calendar.DAY_OF_WEEK)}) Day of Task(${(dayToInt(task.getDay()!!) + 2)})"
-            )*/
             var dayInt = (dayToInt(task.getDay()!!) + 2) % 7
             if(dayInt == 0) { dayInt = 7}
             if (dayInt < cal.get(Calendar.DAY_OF_WEEK)) {

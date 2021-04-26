@@ -14,7 +14,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
-   sodipodi:docname="themes.svg">
+   sodipodi:docname="themes.svg"
+   inkscape:export-filename="/home/iqsoft/git/ToDoList/images/themes.png"
+   inkscape:export-xdpi="96.800003"
+   inkscape:export-ydpi="96.800003">
   <defs
      id="defs2">
     <mask
@@ -356,11 +359,15 @@
        rx="9.141407"
        ry="9.141407"
        sodipodi:type="rect"
-       d="M 16.283751,16.024733 H 193.53146 c 5.06433,0 9.1414,4.077067 9.1414,9.141407 v 234.74691 c 0,5.06434 -4.07707,9.14141 -9.1414,9.14141 H 16.283751 c -5.064339,0 -9.1414065,-4.07707 -9.1414065,-9.14141 V 25.16614 c 0,-5.06434 4.0770675,-9.141407 9.1414065,-9.141407 z" />
+       d="M 16.283751,16.024733 H 193.53146 c 5.06433,0 9.1414,4.077067 9.1414,9.141407 v 234.74691 c 0,5.06434 -4.07707,9.14141 -9.1414,9.14141 H 16.283751 c -5.064339,0 -9.1414065,-4.07707 -9.1414065,-9.14141 V 25.16614 c 0,-5.06434 4.0770675,-9.141407 9.1414065,-9.141407 z"
+       inkscape:export-xdpi="96.800003"
+       inkscape:export-ydpi="96.800003" />
     <g
        id="g1921"
        clip-path="url(#clipPath1935)"
-       transform="matrix(0.57145049,0,0,0.57145049,501.18955,338.39851)">
+       transform="matrix(0.57145049,0,0,0.57145049,501.18955,338.39851)"
+       inkscape:export-xdpi="96.800003"
+       inkscape:export-ydpi="96.800003">
       <image
          width="285.75"
          height="619.125"
@@ -14742,7 +14749,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/9k=
        style="font-size:21.1667px;line-height:1.25;font-family:Bolten;-inkscape-font-specification:Bolten;stroke-width:0.264583"
        x="25.787703"
        y="38.198227"
-       id="text1941"><tspan
+       id="text1941"
+       inkscape:export-xdpi="96.800003"
+       inkscape:export-ydpi="96.800003"><tspan
          sodipodi:role="line"
          id="tspan1939"
          x="25.787703"
@@ -14756,6 +14765,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/9k=
        x="55.025845"
        y="46.219692"
        rx="1.1961751"
-       ry="1.1961751" />
+       ry="1.1961751"
+       inkscape:export-xdpi="96.800003"
+       inkscape:export-ydpi="96.800003" />
   </g>
 </svg>
