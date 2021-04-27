@@ -12,7 +12,7 @@
 
     <PreferenceCategory app:title="Notifications">
         <SwitchPreference
-            app:defaultValue="false"
+            app:defaultValue="true"
             app:key="notification"
             app:title="Enable Notification"
             />
