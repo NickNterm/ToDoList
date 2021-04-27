@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,8 +7,13 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/MainActivityLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="50dp"
         android:orientation="vertical">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -30,23 +35,25 @@
                     android:layout_height="wrap_content"
                     android:text="ToDoList"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical|right"
-                android:orientation="vertical">
-                <ImageButton
-                    android:id="@+id/SettingsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?colorPrimaryDark"
-                    android:paddingHorizontal="20dp"
-                    android:layout_gravity="right"
-                    android:paddingVertical="5dp"
-                    android:src="@drawable/ic_baseline_settings_24" />
-            </LinearLayout>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/SettingsButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:background="?colorPrimaryDark"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="5dp"
+                        android:src="@drawable/ic_baseline_settings_24" />
+                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -66,14 +73,38 @@
             android:id="@+id/MainActivityViewPager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?background" />
+            android:background="?background"/>
+
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/AddButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|right"
-        android:layout_margin="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="70dp"
         android:src="@drawable/add_icon" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <LinearLayout
+        android:id="@+id/adLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:background="@color/PrimaryBackgroundDark"
+        android:gravity="center">
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:foregroundGravity="center"
+
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-9885826089735978/9269615008" />
+    </LinearLayout>
+
+</RelativeLayout>

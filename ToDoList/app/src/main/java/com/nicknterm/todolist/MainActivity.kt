@@ -1,5 +1,6 @@
 package com.nicknterm.todolist
 
+import android.R.attr.*
 import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.NotificationChannel
@@ -7,16 +8,24 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginBottom
 import androidx.preference.PreferenceManager
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
-import java.time.DayOfWeek
 import java.util.*
 
 
@@ -51,6 +60,49 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        MobileAds.initialize(this@MainActivity)
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
+        adView.adListener = object : AdListener() {
+            override fun onAdClosed() {
+                Toast.makeText(this@MainActivity, "Thank You For The Support", Toast.LENGTH_SHORT)
+                    .show()
+                super.onAdClosed()
+            }
+
+            override fun onAdFailedToLoad(p0: LoadAdError) {
+                val layoutParams = RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, 0
+                )
+                adLayout.layoutParams = layoutParams
+                val mainLL = RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.MATCH_PARENT,
+                    RelativeLayout.LayoutParams.MATCH_PARENT
+                )
+                mainLL.setMargins(
+                    0,
+                    0,
+                    0,
+                    0
+                )
+                MainActivityLinearLayout.layoutParams = mainLL
+                val buttonLayoutParams = RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT
+                )
+                buttonLayoutParams.setMargins(
+                    Resources.getSystem().displayMetrics.widthPixels - (80 * Resources.getSystem().displayMetrics.density).toInt(),
+                    Resources.getSystem().displayMetrics.heightPixels - (100 * Resources.getSystem().displayMetrics.density).toInt(),
+                    0,
+                    0
+                )
+                AddButton.layoutParams = buttonLayoutParams
+                super.onAdFailedToLoad(p0)
+            }
+        }
+
+
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         dayToStart = if (intent.getStringExtra("Day") != null) {
@@ -105,6 +157,7 @@ class MainActivity : AppCompatActivity() {
             createNotifications()
         }
 
+
     }
 
     override fun onBackPressed() {
@@ -155,7 +208,7 @@ class MainActivity : AppCompatActivity() {
         val tasks = myDB.getNotificationItems()
         var id = -1
         for (task in tasks) {
-            id +=1
+            id += 1
             val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
             val cal = Calendar.getInstance()
             Log.i(
@@ -168,7 +221,9 @@ class MainActivity : AppCompatActivity() {
             cal.set(Calendar.SECOND, 0)
 
             var dayInt = (dayToInt(task.getDay()!!) + 2) % 7
-            if(dayInt == 0) { dayInt = 7}
+            if (dayInt == 0) {
+                dayInt = 7
+            }
             if (dayInt < cal.get(Calendar.DAY_OF_WEEK)) {
                 cal.add(Calendar.WEEK_OF_MONTH, 1)
                 cal.set(Calendar.DAY_OF_WEEK, (dayToInt(task.getDay()!!) + 2) % 7)
@@ -188,7 +243,7 @@ class MainActivity : AppCompatActivity() {
                 Log.i("Mymsg", "time before $minutesToNotify and millis $finalMillis")*/
 
                 Log.i("Mymsg", "time before $minutesToNotify and millis $finalMillis")
-            }else{
+            } else {
                 cal.add(Calendar.DAY_OF_MONTH, 7)
                 /*Log.i(
                     "Mymsg",
@@ -205,7 +260,7 @@ class MainActivity : AppCompatActivity() {
             bundle.putParcelable("task", task)
             intent.putExtra("bundle", bundle)
             val pendingIntent =
-                PendingIntent.getBroadcast(this, id , intent, 0)
+                PendingIntent.getBroadcast(this, id, intent, 0)
             alarmManager.setExact(
                 AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() + finalMillis - (minutesToNotify * 60 * 1000),
@@ -213,7 +268,8 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
-    private fun cancelAlarmManager(){
+
+    private fun cancelAlarmManager() {
         val myDB = DatabaseHandler(this)
         val tasks = myDB.getNotificationItems()
         val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager

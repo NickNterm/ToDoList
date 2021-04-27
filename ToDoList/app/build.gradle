@@ -12,8 +12,8 @@ android {
         applicationId 'com.nicknterm.todolist'
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 4
-        versionName "2.6"
+        versionCode 5
+        versionName "2.7"
 
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -49,4 +49,6 @@ dependencies {
     implementation 'com.github.dhaval2404:colorpicker:2.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.google.android.gms:play-services-ads:20.0.0'
 }
